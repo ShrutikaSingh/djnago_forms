@@ -5,4 +5,4 @@ from .forms import ContactForm
 def contact(request):
     form=ContactForm()
     #return HttpResponse('contact view') it was earlier when we dont have template
-    return render(request, 'form.html', {'forms':form})
+    return render(request, 'form.html', {'forms_11':form})

@@ -65,12 +65,20 @@ form=ContactForm()
 
 )now we want to return the template and form instead of httpresponse
 
-return render(request, 'form.html', {'forms':form})#form.html is a template and form is the same variable that we created above
+return render(request, 'form.html', {'forms_11':form})#form.html is a template and form is the same variable that we created above
 
+this forms_11 can be any variable that we can use in html template to display our form
 
 7)create templates
 now we have to create a folder called templates in our app (form_app)
 we have to create a form.html in templates folder
+
+and inside the html template inside body call {{forms_11}} #this forms is basicall name of the form variable that we used for render in views.py
+i.e  
+ return render(request, 'form.html', {'forms_11':form})
+
+
+
 
 
  
