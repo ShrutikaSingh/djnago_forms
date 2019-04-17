@@ -5,8 +5,10 @@
       <title> Contact formm</title>
     </head>
     <body>
-      <form action="post">
+      <form method="post">
+        {% csrf_token %}
         {{ forms_11 }}
+        <button type="submit">Submit</button>
       </form>
     </body>
   </html>

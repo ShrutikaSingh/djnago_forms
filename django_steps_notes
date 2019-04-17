@@ -78,16 +78,74 @@ i.e
  return render(request, 'form.html', {'forms_11':form})
 
 
+***and you can run the server to see the basic form created there
+
+)in django we don't get form tag manually so we have to create it
+
+8)go to form.html
+and create form tag with method=post
+add csrf token
+add button with type=submit
+
+till now we created a simple form now we have to look form data to fill
 
 
+^there rae two types of form:-
+a)unbound form :- that doesnt have any data
+b)bound form :- that contains data  to play with
+till now our form is unbound now we will make it bound
 
+
+9)now we want to populate our form with data submited by user
+if request.method='POST':
+        form=ContactForm(request.POST)#since the method of form is post check in form.html
+
+
+to populate our form with data we also have to check that the data entered by user is valid or not using form.is.valid() method
+and if the data entered by user is valid then we have to snatch the data using form.cleaned_data method
+if form.is.valid():
+            name=form.cleaned_data['name']
+
+;;;;;;;;;;;;;;;;;code:views.py;;;;;;;;;;;;
+# Create your views here.
+def contact(request):
+    if request.method=='POST':
+        form=ContactForm(request.POST)#this will populate our form with the data submitted by user
+        if form.is_valid():
+            name=form.cleaned_data['name']
+            name=form.cleaned_data['email']
+            print(name,email)#f
+    form=ContactForm()
+    #return HttpResponse('contact view') it was earlier when we dont have template
+    return render(request, 'form.html', {'forms_11':form})
+
+
+10)
+and in the form.html remember to change the action to method 
+	
+  <form action="post"> replace action with method
+<form method="post">
+
+11)now run the server
+fill the details and submit it
+
+and look back into the teminal 
+we can see the name and email in get request 
+
+>Quit the server with CONTROL-C.
+[17/Apr/2019 11:57:45] "GET /post?csrfmiddlewaretoken=jxIznhIg91OXBOSVj2Pa53ycX5Pdw3GWjwjyjqQRKZGZEiuwiKb4mfcI5arBfhxO&name=shrutika&email=sh%40gmail.com&cat
  
+and we can also try saving thesRMes data to database
 
 
 
 
+*******************************MODEL FORMS*******
+11)MODEL FORMS
+Model Form is quite useful since we simply call a method and it takes care of automatically saving the model to the database instead of we manually doing it
 
 
+12)so head over to models .py file
 
 
 
