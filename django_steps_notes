@@ -1,0 +1,110 @@
+start project
+>python manage.py startproject django_forms
+start app
+>python manage.py startapp form_app
+
+
+1)
+register app in installed app of settings.py
+go to project url
+include the url of the app using form_app.urls (name of the app you created.urls)
+url('',include('form_app.urls')),
+this is done so that if we include any path/url in our app then it gets automatically called in our project too using form_app.urls
+
+
+2)
+then go to our app url.py here form_app
+create paths in urls.py
+url('',views.contact),
+and make sure to import views
+from . import views
+
+3)
+now we can go to views.py file nd create contact view in there
+from django.shortcuts import render
+from django.http import HttpResponse
+# Create your views here.
+def contact(request):
+    return HttpResponse('contact view')
+
+4)now make migrations
+>python manage.py makemigrations
+>python manage.py migrate
+
+				*******     Contact Us Form    *************
+
+				now we are going to make our first form
+				this will be very simple contact form that will going to
+				catch the value as soon the user wants to contact us
+r
+
+5)go to your app here form_app and create a file forms.py
+
+)import forms
+)create form using class (having the subclass forms.Form)
+)create fields you want (method is similar to as you crated in models)
+
+##in forms.py
+from django import forms
+class ContactForm(forms.Form):
+        name=forms.charField()
+        email=forms.EmailField(Label='E-mail')
+        category=forms.ChoiceField(choices=[('question','Question'),('other','Other')])#array of tupples
+        subject=forms.CharField(required=False)
+        body=forms.CharField(widget=form.Textarea)#widgests are used to represent actual html representation of a vield #by default widget is text input therefore we write widget here to make it large i.e textarea not textinput
+
+
+6)go to views.py
+)and import the form that we created i.e ContactForm
+
+from .forms import ContactForm
+
+)now we will create a variable to store our form
+
+form=ContactForm()
+
+)now we want to return the template and form instead of httpresponse
+
+return render(request, 'form.html', {'forms':form})#form.html is a template and form is the same variable that we created above
+
+
+7)create templates
+now we have to create a folder called templates in our app (form_app)
+we have to create a form.html in templates folder
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
