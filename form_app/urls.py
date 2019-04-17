@@ -3,6 +3,7 @@ from . import views
 
 
 urlpatterns = [
-    url('',views.contact),
+    url('snippet',views.snippet_detail),
+    url('',views.contact)
 
 ]

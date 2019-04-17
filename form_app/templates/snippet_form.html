@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title> Contact formm</title>
+</head>
+
+<body>
+  <form method="post">
+    {% csrf_token %}
+    {{ forms_22 }}
+    <button type="submit">Submit</button>
+  </form>
+  <h1>
+    {{ name }}
+  </h1>
+</body>
+
+</html>

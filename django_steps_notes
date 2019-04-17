@@ -140,20 +140,119 @@ and we can also try saving thesRMes data to database
 
 
 
-*******************************MODEL FORMS*******
+					*******************************MODEL FORMS*******
+					*******************************MODEL FORMS*******
+					*******************************MODEL FORMS*******
 11)MODEL FORMS
 Model Form is quite useful since we simply call a method and it takes care of automatically saving the model to the database instead of we manually doing it
 
 
-12)so head over to models .py file
+12)so head over to models.py file
+and create a class 
+and enter the fields
+class Snippet(models.Model):
+    name=models.CharField(max_length=100)
+    body=models.TextField()
+
+and then create a dundered str method
+using __str__(self) to return any field
+def __str__(self):
+        return self.name
+
+;;;;;;;;;;;;;;;;;code:models.py;;;;;;;;;;;;
+class Snippet(models.Model):
+    name=models.CharField(max_length=100)
+    body=models.TextField()
+
+    def __str__(self):
+        return self.name
+
+13)then go to terminal and make the migrations
+rember whenever you change the models.py file you have to make the migrations so as the database get updated
+>python manage.py makemigrations
+>python manage.py migrate
+
+output in terminal
+ form_app/migrations/0001_initial.py
+    - Create model Snippet
+
+---means it created a 0001_initial.py file in  our app(form_app) ->migrations folder 
+that basically contains all the data field
+
+
+14)now go to forms.py
+create a class (here SnippetForm) and subclass of this modelform will be forms.ModelForm
+class SnippetForm(forms.ModelForm):
+
+inside that class we have to create another class Meta in which we hv eto specify which  model forms(classes defined in models.py) we are going to use in this form form here
+class Meta:
+            model =Snippet #Snippet is the calss we created in models.py
+
+and make sure to import Snippet
+from .models import Snippet
+
+and then in Meta Class we have to also specify the fields in  that we defined in the Snippet class of models.py
+
+fields = ('name','body')
+
+15)now go to views.py to create a new view
+import SnippetForm from .forms
+
+and same as contact view we created above create a snippet_detail view and replace the ContactForm with SnippetForm everywher in the snippet_detail 
+
+
+;;;;;;;;;;;;;;;;;code:views.py;;;;;;;;;;;;
+def snippet_detail(request):
+    if request.method=='POST':
+        form2=SnippetForm(request.POST)#this will populate our form with the data submitted by user
+        if form2.is_valid():
+            form2.save()#*******it is very important to save to add the data in database or in the admin section
+    form2=SnippetForm()
+    #return HttpResponse('contact view') it was earlier when we dont have template
+    return render(request, 'snippet_form.html', {'forms_22':form2})
+    #call the {{forms_22}} in the template snippet_form.html after the csrf token to see the form
+    #to see the from to the route that is speciefied  for this view (i.e snippet_detail view)in urls.py
 
 
 
 
+17)now create a new path to see the SnippetForm
+go to urls.py 
+
+url('snippet',views.snippet_detail)
+
+18)now call the form in snippet_fo rm.html template
+  <body>
+    <form method="post">
+      {% csrf_token %}
+      {{ forms_22 }}
+      <button type="submit">Submit</button>
+    </form>
+  </body>
 
 
 
+18)so now we have to view our models in admin
+for that we have to first create the super user
+go to terminal
+>python manage.py createsuperuser
 
+18)to see the model in admin
+we have to register the model(here Snippet model) in admin.py
+admin.site.register(Snippet)
+
+and import Snippet model in admin.py
+from .models import Snippet
+
+
+18)now run the server
+go to localhost/snippet
+you will see the new snippet form there
+go to localhost/admin
+you will se the admin page there with snippets option
+
+
+19)but 
 
 
 

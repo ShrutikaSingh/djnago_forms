@@ -17,6 +17,8 @@ from django.conf.urls import url,include
 from django.contrib import admin
 
 urlpatterns = [
-    url('',include('form_app.urls')),
-    url(r'^admin/', admin.site.urls),
+
+
+ url('admin/', admin.site.urls),
+    url('',include('form_app.urls')),#for other urls to be visible this should remain at last
 ]
